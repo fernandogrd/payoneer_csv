@@ -1,5 +1,5 @@
+require 'base64'
 require 'debugger'
-require 'pdf-reader'
 require 'ap'
 
 def is_transaction_row?(row)
@@ -7,15 +7,54 @@ def is_transaction_row?(row)
   row.match(start_with_date)
 end
 
-raw_transactions = []
-File.open("Transcations.pdf", "rb") do |io|
-  reader = PDF::Reader.new(io)
-  
-  reader.pages.each do |page|
-    page.text.each_line do |row|
-      raw_transactions << row.strip if is_transaction_row?(row)
+class Transaction
+  attr_reader :created_at
+  attr_reader :created_on
+  attr_reader :description
+  attr_reader :amount
+
+  def initialize(attributes)
+    @created_at = attributes[:created_at]
+    @created_on = attributes[:created_on]
+    @description = attributes[:description].strip
+    @amount = attributes[:amount].to_f
+  end
+
+  def client_assigned_id
+    Base64.encode64("payoneer-#{created_at}").strip
+  end
+
+  def direction
+    amount >=0 ? :deposit : :withdrawal
+  end
+
+  def created_on
+    month, day, year = @created_on.split('/')
+    "#{day}-#{month}-#{year}"
+  end
+
+  def to_hash
+    Hash.new.tap do |hash|
+      hash[:client_assigned_id] = client_assigned_id
+      hash[:created_on] = created_on
+      hash[:description] = description
+      hash[:amount] = amount
+      hash[:direction] = direction
     end
   end
 end
 
-ap raw_transactions
+transactions = []
+
+raw_data = `less Transactions2.pdf`
+raw_data.each_line do |row|
+  match_data = row.match \
+    /^(?<created_at>(?<created_on>\d{1,2}\/\d{1,2}\/\d{4}) \d{1,2}:\d{2}:\d{2} (AM|PM))\s+ \
+      (?<description>.+) \
+      (?<amount>-?(\d|,)+\.\d{2})\s+USD/
+  next unless match_data
+
+  transactions << Transaction.new(match_data)
+end
+
+ap transactions.map(&:to_hash)
