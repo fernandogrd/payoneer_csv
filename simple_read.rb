@@ -13,7 +13,7 @@ File.open("Transcations.pdf", "rb") do |io|
   
   reader.pages.each do |page|
     page.text.each_line do |row|
-      raw_transactions << row if is_transaction_row?(row)
+      raw_transactions << row.strip if is_transaction_row?(row)
     end
   end
 end
