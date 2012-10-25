@@ -41,7 +41,7 @@ end
 
 transactions = []
 
-raw_data = `less spec/fixtures/Transactions2.pdf`
+raw_data = `less spec/fixtures/Transactions.pdf`
 raw_data.each_line do |row|
   match_data = row.match \
     /^(?<created_at>(?<created_on>\d{1,2}\/\d{1,2}\/\d{4}) \d{1,2}:\d{2}:\d{2} (AM|PM))\s+ \
