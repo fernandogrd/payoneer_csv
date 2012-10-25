@@ -20,10 +20,6 @@ class Transaction
     @amount = attributes[:amount].to_f
   end
 
-  def client_assigned_id
-    Base64.encode64("payoneer-#{created_at}").strip
-  end
-
   def direction
     amount >=0 ? :deposit : :withdrawal
   end
@@ -35,7 +31,6 @@ class Transaction
 
   def to_hash
     Hash.new.tap do |hash|
-      hash[:client_assigned_id] = client_assigned_id
       hash[:created_on] = created_on
       hash[:description] = description
       hash[:amount] = amount
@@ -46,7 +41,7 @@ end
 
 transactions = []
 
-raw_data = `less Transactions2.pdf`
+raw_data = `less spec/fixtures/Transactions2.pdf`
 raw_data.each_line do |row|
   match_data = row.match \
     /^(?<created_at>(?<created_on>\d{1,2}\/\d{1,2}\/\d{4}) \d{1,2}:\d{2}:\d{2} (AM|PM))\s+ \

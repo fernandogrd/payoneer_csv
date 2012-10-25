@@ -1,5 +1,5 @@
 # -*- encoding: utf-8 -*-
-require File.expand_path('../lib/payoneer-csv/version', __FILE__)
+require File.expand_path('../lib/payoneer_csv/version', __FILE__)
 
 Gem::Specification.new do |gem|
   gem.authors       = ["Łukasz Bandzarewicz"]
@@ -13,5 +13,5 @@ Gem::Specification.new do |gem|
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
   gem.name          = "payoneer-csv"
   gem.require_paths = ["lib"]
-  gem.version       = Payoneer::Csv::VERSION
+  gem.version       = PayoneerCsv::VERSION
 end

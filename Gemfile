@@ -4,3 +4,6 @@ source 'https://rubygems.org'
 gemspec
 
 gem 'pdf-reader'
+gem 'rest-client'
+gem 'json'
+gem 'awesome_print'
