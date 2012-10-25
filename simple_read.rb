@@ -41,6 +41,7 @@ end
 
 transactions = []
 
+# TODO replace with ps2ascii
 raw_data = `less spec/fixtures/Transactions.pdf`
 raw_data.each_line do |row|
   match_data = row.match \
