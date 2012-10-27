@@ -6,7 +6,7 @@ Gem::Specification.new do |gem|
   gem.email         = ["lucassus@gmail.com"]
   gem.description   = %q{Simple tool for converting payoneer pdf report to csv file}
   gem.summary       = %q{Convert payoneer pdf report to csv file}
-  gem.homepage      = ""
+  gem.homepage      = "https://github.com/lucassus/payoneer_csv"
 
   gem.files         = `git ls-files`.split($\)
   gem.executables   = gem.files.grep(%r{^bin/}).map { |f| File.basename(f) }
