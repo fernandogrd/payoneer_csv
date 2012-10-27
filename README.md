@@ -17,7 +17,7 @@ Transaction Date,Description,Amount,Currency
 
 Add this line to your application's Gemfile:
 
-    gem 'payoneer-csv'
+    gem 'payoneer_csv'
 
 And then execute:
 
@@ -25,7 +25,7 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install payoneer-csv
+    $ gem install payoneer_csv
 
 ## Usage
 
