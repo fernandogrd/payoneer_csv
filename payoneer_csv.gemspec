@@ -4,8 +4,8 @@ require File.expand_path('../lib/payoneer_csv/version', __FILE__)
 Gem::Specification.new do |gem|
   gem.authors       = ["Lukasz Bandzarewicz"]
   gem.email         = ["lucassus@gmail.com"]
-  gem.description   = %q{TODO: Write a gem description}
-  gem.summary       = %q{TODO: Write a gem summary}
+  gem.description   = %q{Simple tool for converting payoneer pdf report to csv file}
+  gem.summary       = %q{Convert payoneer pdf report to csv file}
   gem.homepage      = ""
 
   gem.files         = `git ls-files`.split($\)
