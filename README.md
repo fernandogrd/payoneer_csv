@@ -2,6 +2,8 @@
 
 Simple tool for converting payoneer pdf report to csv file.
 
+[![Build status](https://secure.travis-ci.org/lucassus/payoneer_csv.png)](http://travis-ci.org/lucassus/payoneer_csv)
+
 ## Installation
 
 Add this line to your application's Gemfile:
