@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe PayoneerCsv::Reader do
+describe PayoneerCsv::PdfReader do
   let(:file_path) { File.join(File.dirname(__FILE__), '..', 'fixtures', 'Transactions.pdf') }
 
   let(:reader) { described_class.new(file_path) }
@@ -16,6 +16,7 @@ describe PayoneerCsv::Reader do
 
       it 'should include some transactions' do
         should_not be_empty
+
         should include('10/19/2012 11:38:12 PM         PSS SKLEP NR 54                          -17.36     USD')
         should include('10/19/2012 6:41:14 AM          COSTA COFFEE                              -7.41     USD')
         # ...

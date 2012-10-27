@@ -1,6 +1,6 @@
 module PayoneerCsv
 
-  class Reader
+  class PdfReader
     attr_reader :file_path
 
     def initialize(file_path)
