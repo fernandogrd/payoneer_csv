@@ -4,7 +4,7 @@ describe PayoneerCsv::Transaction do
   let(:attributes) {
     {
       description: 'Sample transaction',
-      amount: '123.99',
+      amount: '2,123.99',
       created_at: '10/19/2012 11:38:12 PM'
     }
   }
@@ -13,7 +13,7 @@ describe PayoneerCsv::Transaction do
   subject { transaction }
 
   its(:description) { should == attributes[:description] }
-  its(:amount) { should == attributes[:amount].to_f }
+  its(:amount) { should == 2_123.99 }
   its(:created_at) { should == attributes[:created_at] }
 
 end

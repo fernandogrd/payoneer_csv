@@ -8,7 +8,7 @@ module PayoneerCsv
     def initialize(attributes)
       @created_at = attributes[:created_at]
       @description = attributes[:description].strip
-      @amount = attributes[:amount].to_f
+      @amount = attributes[:amount].gsub(',', '').to_f
     end
   end
 

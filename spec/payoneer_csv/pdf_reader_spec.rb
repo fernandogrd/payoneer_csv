@@ -41,12 +41,12 @@ describe PayoneerCsv::PdfReader do
       end
 
       context 'on valid row (with positive amount)' do
-        let(:row) { '10/19/2012 11:38:12 PM         PSS SKLEP NR 54                          17.36     USD' }
+        let(:row) { '10/19/2012 11:38:12 PM         PSS SKLEP NR 54                        2,117.36     USD' }
 
         it { should_not be_nil }
         its([:created_at]) { should == '10/19/2012 11:38:12 PM' }
-        its([:description]) { should == 'PSS SKLEP NR 54                         ' }
-        its([:amount]) { should == '17.36' }
+        its([:description]) { should == 'PSS SKLEP NR 54                       ' }
+        its([:amount]) { should == '2,117.36' }
       end
 
       context 'on invalid row' do
