@@ -17,30 +17,43 @@ describe PayoneerCsv::Csv do
 
       it { should be_an_instance_of(String) }
 
-      it 'should include all transactions' do
-        parsed = CSV.parse(csv_string)
+      describe 'rows' do
+        def nth_row(n)
+          csv_string.split("\n")[n].split(',')
+        end
 
-        parsed.should have(3).items
+        describe 'csv header' do
+          subject { nth_row(0) }
 
-        header = parsed[0]
-        header[0].should == 'Transaction Date'
-        header[1].should == 'Description'
-        header[2].should == 'Amount'
-        header[3].should == 'Currency'
+          it { should have(4).items }
 
-        first_row = parsed[1]
-        created_at, description, amount, currency = *first_row
-        created_at.should == '10/11/2011'
-        description.should == 'Foo'
-        amount.should == '123.12'
-        currency.should == 'USD'
+          its([0]) { should == 'Transaction Date' }
+          its([1]) { should == 'Description' }
+          its([2]) { should == 'Amount' }
+          its([3]) { should == 'Currency' }
+        end
 
-        second_row = parsed[2]
-        created_at, description, amount, currency = *second_row
-        created_at.should == '01/09/2012'
-        description.should == 'Bar'
-        amount.should == '-9.99'
-        currency.should == 'USD'
+        describe 'first row' do
+          subject { nth_row(1) }
+
+          it { should have(4).items }
+
+          its([0]) { should == '10/11/2011' }
+          its([1]) { should == 'Foo' }
+          its([2]) { should == '123.12' }
+          its([3]) { should == 'USD' }
+        end
+
+        describe 'second row' do
+          subject { nth_row(2) }
+
+          it { should have(4).items }
+
+          its([0]) { should == '01/09/2012' }
+          its([1]) { should == 'Bar' }
+          its([2]) { should == '-9.99' }
+          its([3]) { should == 'USD' }
+        end
       end
     end
   end
