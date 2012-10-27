@@ -1,5 +1,10 @@
 #!/usr/bin/env ruby
 
+unless ARGV[0]
+  puts 'Usage: payoneer_csv /path/to/transaction_list.pdf'
+  exit
+end
+
 payoneer_csv_dir = File.expand_path(File.join(File.dirname(__FILE__), '..', 'lib'))
 $LOAD_PATH.unshift(payoneer_csv_dir) unless $LOAD_PATH.include?(payoneer_csv_dir)
 
