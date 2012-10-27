@@ -20,6 +20,9 @@ Or install it yourself as:
 
 `payoneer_csv [path to pdf report]`
 
+Example:
+
+
 ```
 $ payoneer_csv Transcations.pdf 
 Transaction Date,Description,Amount,Currency
