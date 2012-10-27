@@ -5,9 +5,6 @@ unless ARGV[0]
   exit
 end
 
-payoneer_csv_dir = File.expand_path(File.join(File.dirname(__FILE__), '..', 'lib'))
-$LOAD_PATH.unshift(payoneer_csv_dir) unless $LOAD_PATH.include?(payoneer_csv_dir)
-
 require 'payoneer_csv'
 
 file_path = File.expand_path(ARGV[0])
