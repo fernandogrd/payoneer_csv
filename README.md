@@ -6,6 +6,10 @@ Simple tool for converting payoneer pdf report to csv file.
 
 ## Installation
 
+First of all install `pdftotext` executable
+
+    $ sudo apt-get install poppler-utils
+
 Add this line to your application's Gemfile:
 
     gem 'payoneer_csv'
