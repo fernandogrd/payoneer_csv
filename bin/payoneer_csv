@@ -1,18 +1,27 @@
 #!/usr/bin/env ruby
 
-unless ARGV[0]
-  puts 'Usage: payoneer_csv /path/to/transaction_list.pdf'
-  exit
-end
-
+require 'optparse'
+require 'methadone'
 require 'payoneer_csv'
 
-file_path = File.expand_path(ARGV[0])
-unless File.exist?(file_path)
-  puts "Cannot find file: #{file_path}"
-  exit
-end
+class App
+  include Methadone::Main
+  include Methadone::CLILogging
 
-reader = PayoneerCsv::PdfReader.new(file_path)
-csv_string = PayoneerCsv::Csv.new(reader.read).generate
-puts csv_string
+  main do |file_path|
+    unless File.exist?(file_path)
+      puts "Cannot find file: #{file_path}"
+      exit
+    end
+
+    reader = PayoneerCsv::PdfReader.new(file_path)
+    csv_string = PayoneerCsv::Csv.new(reader.read).generate
+    puts csv_string
+  end
+
+  arg :file_path
+
+  version PayoneerCsv::VERSION
+
+  go!
+end

@@ -14,4 +14,6 @@ Gem::Specification.new do |gem|
   gem.name          = "payoneer_csv"
   gem.require_paths = ["lib"]
   gem.version       = PayoneerCsv::VERSION
+
+  gem.add_dependency('methadone', '1.2.2')
 end

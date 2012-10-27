@@ -5,8 +5,10 @@ gemspec
 
 group :development, :test do
   gem 'rspec'
+  gem 'cucumber'
+  gem 'aruba'
   gem 'simplecov', require: false
 
   gem 'awesome_print'
-  gem 'debugger', platforms: :ruby
+  gem 'debugger'
 end

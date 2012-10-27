@@ -3,7 +3,6 @@ language: ruby
 rvm:
   - 1.9.2
   - 1.9.3
-  - jruby-19mode
 
 before_install:
  - sudo apt-get update -qq
@@ -11,3 +10,4 @@ before_install:
 
 script:
   - "rspec spec"
+  - "cucumber features"
