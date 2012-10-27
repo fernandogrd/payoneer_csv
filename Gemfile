@@ -6,4 +6,11 @@ gemspec
 gem 'pdf-reader'
 gem 'rest-client'
 gem 'json'
-gem 'awesome_print'
+
+group :development, :test do
+  gem 'rspec'
+  gem 'simplecov', require: false
+
+  gem 'awesome_print'
+  gem 'debugger'
+end
