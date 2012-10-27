@@ -5,7 +5,7 @@ Simple tool for converting payoneer pdf report to csv file.
 Usage:
 
 ```
-$ payoneer_csv /tmp/Transcations.pdf 
+$ payoneer_csv Transcations.pdf 
 Transaction Date,Description,Amount,Currency
 10/26/2012 8:15:31 PM,Delikatesy Alma,-7.83,USD
 10/26/2012 12:25:14 AM,DEEZER,-4.87,USD
