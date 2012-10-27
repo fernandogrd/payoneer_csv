@@ -6,9 +6,9 @@ module PayoneerCsv
     attr_reader :created_at
 
     def initialize(attributes)
+      @created_at = attributes[:created_at]
       @description = attributes[:description].strip
       @amount = attributes[:amount].to_f
-      @created_at = attributes[:created_at]
     end
 
     def direction
