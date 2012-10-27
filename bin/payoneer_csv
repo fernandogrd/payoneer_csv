@@ -8,6 +8,11 @@ end
 require 'payoneer_csv'
 
 file_path = File.expand_path(ARGV[0])
+unless File.exist?(file_path)
+  puts "Cannot find file: #{file_path}"
+  exit
+end
+
 reader = PayoneerCsv::PdfReader.new(file_path)
 csv_string = PayoneerCsv::Csv.new(reader.read).generate
 puts csv_string
