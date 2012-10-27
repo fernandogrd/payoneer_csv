@@ -4,18 +4,8 @@ payoneer_csv_dir = File.expand_path(File.join(File.dirname(__FILE__), '..', 'lib
 $LOAD_PATH.unshift(payoneer_csv_dir) unless $LOAD_PATH.include?(payoneer_csv_dir)
 
 require 'payoneer_csv'
-require 'csv'
 
 file_path = File.expand_path(ARGV[0])
 reader = PayoneerCsv::PdfReader.new(file_path)
-transactions = reader.read
-
-csv_string = CSV.generate do |csv|
-  transactions.each do |transaction|
-    row = [:created_at, :description, :amount].map { |field| transaction.send(field) }
-    row << 'USD'
-
-    csv << row
-  end
-end
+csv_string = PayoneerCsv::Csv.new(reader.read).generate
 puts csv_string
