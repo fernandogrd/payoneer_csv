@@ -8,5 +8,4 @@ group :development, :test do
   gem 'simplecov', require: false
 
   gem 'awesome_print'
-  gem 'debugger'
 end
