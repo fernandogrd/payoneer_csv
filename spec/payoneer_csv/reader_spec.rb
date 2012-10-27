@@ -30,13 +30,22 @@ describe PayoneerCsv::Reader do
     describe 'result' do
       subject { reader.parse(row) }
 
-      context 'on valid row' do
+      context 'on valid row (with negative amount)' do
         let(:row) { '10/17/2012 5:58:20 AM          ATM Withdrawal - Vaci u. 42.             -75.29     USD' }
 
         it { should_not be_nil }
         its([:created_at]) { should == '10/17/2012 5:58:20 AM' }
         its([:description]) { should == 'ATM Withdrawal - Vaci u. 42.            ' }
         its([:amount]) { should == '-75.29' }
+      end
+
+      context 'on valid row (with positive amount)' do
+        let(:row) { '10/19/2012 11:38:12 PM         PSS SKLEP NR 54                          17.36     USD' }
+
+        it { should_not be_nil }
+        its([:created_at]) { should == '10/19/2012 11:38:12 PM' }
+        its([:description]) { should == 'PSS SKLEP NR 54                         ' }
+        its([:amount]) { should == '17.36' }
       end
 
       context 'on invalid row' do
@@ -51,9 +60,18 @@ describe PayoneerCsv::Reader do
     it { should respond_to(:read) }
 
     describe 'result' do
-      subject { reader.read }
+      let(:result) { reader.read }
+      subject { result }
 
       it { should have(7).items }
+
+      describe 'first transaction' do
+        subject { result.first }
+
+        its(:created_at) { should == '10/19/2012 11:38:12 PM' }
+        its(:description) { should == 'PSS SKLEP NR 54' }
+        its(:amount) { should == -17.36 }
+      end
     end
   end
 end
