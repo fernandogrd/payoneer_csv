@@ -9,6 +9,8 @@ module PayoneerCsv
 
     def generate
       CSV.generate do |csv|
+        csv << ['Transaction Date', 'Description', 'Amount', 'Currency']
+
         transactions.each do |transaction|
           csv << row_for(transaction)
         end

@@ -20,16 +20,22 @@ describe PayoneerCsv::Csv do
       it 'should include all transactions' do
         parsed = CSV.parse(csv_string)
 
-        parsed.should have(2).items
+        parsed.should have(3).items
 
-        first_row = parsed[0]
+        header = parsed[0]
+        header[0].should == 'Transaction Date'
+        header[1].should == 'Description'
+        header[2].should == 'Amount'
+        header[3].should == 'Currency'
+
+        first_row = parsed[1]
         created_at, description, amount, currency = *first_row
         created_at.should == '10/11/2011'
         description.should == 'Foo'
         amount.should == '123.12'
         currency.should == 'USD'
 
-        second_row = parsed[1]
+        second_row = parsed[2]
         created_at, description, amount, currency = *second_row
         created_at.should == '01/09/2012'
         description.should == 'Bar'
