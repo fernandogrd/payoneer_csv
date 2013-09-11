@@ -17,10 +17,10 @@ describe PayoneerCsv::PdfReader do
       it 'should include some transactions' do
         should_not be_empty
 
-        should include('10/19/2012 11:38:12 PM         PSS SKLEP NR 54                          -17.36     USD')
-        should include('10/19/2012 6:41:14 AM          COSTA COFFEE                              -7.41     USD')
+        should include('10/19/2012 11:38:12 PM PSS SKLEP NR 54 -17.36 USD')
+        should include('10/19/2012 6:41:14 AM COSTA COFFEE -7.41 USD')
         # ...
-        should include('10/15/2012 8:44:18 AM          PKP Intercity                            -48.61     USD')
+        should include('10/15/2012 8:44:18 AM PKP Intercity -48.61 USD')
       end
     end
   end
@@ -32,20 +32,20 @@ describe PayoneerCsv::PdfReader do
       subject { reader.parse(row) }
 
       context 'on valid row (with negative amount)' do
-        let(:row) { '10/17/2012 5:58:20 AM          ATM Withdrawal - Vaci u. 42.             -75.29     USD' }
+        let(:row) { '10/17/2012 5:58:20 AM ATM Withdrawal - Vaci u. 42. -75.29 USD' }
 
         it { should_not be_nil }
         its([:created_at]) { should == '10/17/2012 5:58:20 AM' }
-        its([:description]) { should == 'ATM Withdrawal - Vaci u. 42.            ' }
+        its([:description]) { should == 'ATM Withdrawal - Vaci u. 42.' }
         its([:amount]) { should == '-75.29' }
       end
 
       context 'on valid row (with positive amount)' do
-        let(:row) { '10/19/2012 11:38:12 PM         PSS SKLEP NR 54                        2,117.36     USD' }
+        let(:row) { '10/19/2012 11:38:12 PM PSS SKLEP NR 54 2,117.36 USD' }
 
         it { should_not be_nil }
         its([:created_at]) { should == '10/19/2012 11:38:12 PM' }
-        its([:description]) { should == 'PSS SKLEP NR 54                       ' }
+        its([:description]) { should == 'PSS SKLEP NR 54' }
         its([:amount]) { should == '2,117.36' }
       end
 
@@ -66,8 +66,8 @@ describe PayoneerCsv::PdfReader do
 
       it { should have(7).items }
 
-      describe 'first transaction' do
-        subject { result.first }
+      describe 'a transaction' do
+        subject { result[5] }
 
         its(:created_at) { should == '10/19/2012 11:38:12 PM' }
         its(:description) { should == 'PSS SKLEP NR 54' }

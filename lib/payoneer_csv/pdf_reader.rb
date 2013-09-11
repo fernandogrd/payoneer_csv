@@ -21,11 +21,11 @@ module PayoneerCsv
     end
 
     def raw_data
-      `less #{file_path}`
+      `ps2ascii #{file_path}`
     end
 
     def parse(row)
-      row.match /^(?<created_at>\d{1,2}\/\d{1,2}\/\d{4} \d{1,2}:\d{2}:\d{2} (AM|PM))\s+ (?<description>.+) (?<amount>-?(\d|,)+\.\d{2})\s+USD$/
+      row.match /^(?<created_at>\d{1,2}\/\d{1,2}\/\d{4} \d{1,2}:\d{2}:\d{2} (AM|PM))\s(?<description>.+) (?<amount>-?(\d|,)+\.\d{2})\s+USD$/
     end
   end
 

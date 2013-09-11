@@ -6,7 +6,7 @@ rvm:
 
 before_install:
  - sudo apt-get update -qq
- - sudo apt-get install poppler-utils
+ - sudo apt-get install ghostscript
 
 script:
   - "rspec spec"
