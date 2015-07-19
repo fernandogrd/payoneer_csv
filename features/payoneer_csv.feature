@@ -55,3 +55,12 @@ Feature: My bootstrapped app kinda works
       10/17/2012 5:58:20 AM,ATM Withdrawal - Vaci u. 42.,-75.29,USD
       10/16/2012 6:41:30 AM,ROSSMANN,-14.2,USD
       """
+  Scenario: Run with a newer existing file
+    When I run `payoneer_csv Transactions3.pdf`
+    Then the output should contain:
+      """
+      Transaction Date,Description,Amount,Currency
+      4/6/2015 12:18:25 PM,RATP,-55.8,USD
+      4/6/2015 11:33:49 AM,FRANPRIX,-11.83,USD
+      4/6/2015 11:33:49 AM,HELLO,-37.68,USD
+      """
